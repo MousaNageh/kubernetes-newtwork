@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: users-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: users
+  template:
+    metadata:
+      labels:
+        app: users
+      name: user
+    spec:
+      containers:
+      - name: users-container
+        image: mousanageh/kub-user:3
+        env:
+          - name: AUTH_ADDRESS
+            # value: 'localhost'
+            # value: '10.98.160.84'
+            value: 'auth-service.default'
+      
+      # - name: auth-container
+      #   image: mousanageh/kub-auth:1
+      #   imagePullPolicy: Always
